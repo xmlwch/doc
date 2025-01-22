@@ -1,7 +1,7 @@
 const sidebar = require('./sidebar');
 
 module.exports = {
-    bashe: '/doc/'
+    base: '/doc/'
     dest: 'public',
     locales: {
         '/': {
