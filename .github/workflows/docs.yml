@@ -36,17 +36,32 @@ jobs:
         run: yarn install
       - name: Build              # 第三步，打包代码
         run: yarn docs:build
-        
-      # 查看 workflow 的文档来获取更多信息
-      # @see https://github.com/crazy-max/ghaction-github-pages
-      - name: 部署到 GitHub Pages
+      -
+        name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+      -
+        name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v4
         with:
-          # 部署到 gh-pages 分支
           target_branch: 3.3.x
-          # 部署目录为 VuePress 的默认输出目录
           build_dir: publish
         env:
-          # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
+      # 查看 workflow 的文档来获取更多信息
+      # @see https://github.com/crazy-max/ghaction-github-pages
+      #- name: 部署到 GitHub Pages
+      #  uses: crazy-max/ghaction-github-pages@v4
+      #  with:
+      #    # 部署到 gh-pages 分支
+      #    target_branch: 3.3.x
+      #    # 部署目录为 VuePress 的默认输出目录
+      ##    build_dir: publish
+      #  env:
+      #    # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
