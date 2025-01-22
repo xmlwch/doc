@@ -32,6 +32,8 @@ jobs:
         uses: DerYeger/yarn-setup-action@v1.0.1
         with:
           node-version: '20.x'
+      - name: 安装依赖 
+        run: yarn install
       - name: Build              # 第三步，打包代码
         run: yarn docs:build
         
@@ -43,7 +45,7 @@ jobs:
           # 部署到 gh-pages 分支
           target_branch: gh-pages
           # 部署目录为 VuePress 的默认输出目录
-          build_dir: docs/.vuepress/dist
+          build_dir: publish
         env:
           # @see https://docs.github.com/cn/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
