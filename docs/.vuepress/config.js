@@ -1,7 +1,7 @@
 const sidebar = require('./sidebar');
 
 module.exports = {
-    dest: 'publish',
+    dest: 'public',
     locales: {
         '/': {
             lang: 'zh-CN',
